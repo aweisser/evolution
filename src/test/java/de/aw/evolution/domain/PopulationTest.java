@@ -1,6 +1,5 @@
 package de.aw.evolution.domain;
 
-import de.aw.evolution.domain.actors.EvolutionaryFactorsForReproduction;
 import org.junit.Test;
 
 import static de.aw.evolution.domain.data.TestDataBuilder.aGeneAtLocus;

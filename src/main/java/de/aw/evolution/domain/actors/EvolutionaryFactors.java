@@ -5,27 +5,27 @@ package de.aw.evolution.domain.actors;
  */
 public class EvolutionaryFactors {
 
-    private final EvolutionaryFactorsForReproduction evolutionaryFactorsForReproduction;
+    private final Reproduction reproduction;
 
     private final GeneticDrift geneticDrift;
 
     private final Mutation mutation;
 
-    public EvolutionaryFactors(EvolutionaryFactorsForReproduction evolutionaryFactorsForReproduction, GeneticDrift geneticDrift, Mutation mutation) {
-        this.evolutionaryFactorsForReproduction = evolutionaryFactorsForReproduction;
+    public EvolutionaryFactors(Reproduction reproduction, GeneticDrift geneticDrift, Mutation mutation) {
+        this.reproduction = reproduction;
         this.geneticDrift = geneticDrift;
         this.mutation = mutation;
     }
 
-    public EvolutionaryFactorsForReproduction getEvolutionaryFactorsForReproduction() {
-        return evolutionaryFactorsForReproduction;
+    public Reproduction reproduction() {
+        return reproduction;
     }
 
-    public GeneticDrift getGeneticDrift() {
+    public GeneticDrift geneticDrift() {
         return geneticDrift;
     }
 
-    public Mutation getMutation() {
+    public Mutation mutation() {
         return mutation;
     }
 }

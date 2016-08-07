@@ -1,14 +1,10 @@
 package de.aw.evolution.domain;
 
+import de.aw.evolution.domain.actors.Reproduction;
 import de.aw.evolution.domain.actors.GeneticDrift;
 import de.aw.evolution.domain.actors.Mutation;
-import de.aw.evolution.domain.actors.EvolutionaryFactorsForReproduction;
-import de.aw.evolution.util.FitnessComparator;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,6 +30,12 @@ public class Population  {
         this.currentGeneration = startGeneration;
     }
 
+    /**
+     * Applying the environment to the population will kill some individuals.
+     * The die rate depends on the fitness of each organism.
+     *
+     * @param environment
+     */
     public void apply(Environment environment) {
         // TODO let the environmental factors affect the fitness of the population
     }
@@ -46,16 +48,9 @@ public class Population  {
         // TODO let a Mutation affect the GenPool of the population
     }
 
-    public Generation reproduce(EvolutionaryFactorsForReproduction evolutionaryFactorsForReproduction) {
-        currentGeneration = currentGeneration.createNexGeneration(evolutionaryFactorsForReproduction);
+    public Generation reproduce(Reproduction reproduction) {
+        currentGeneration = currentGeneration.createNexGeneration(reproduction);
         return currentGeneration;
-    }
-
-    public Collection<Organism> getWeakest(double percentage) {
-        List<Organism> weakestFirstList = new ArrayList<>(getIndividuals());
-        weakestFirstList.sort(new FitnessComparator().reversed());
-        Long offset = Math.round(weakestFirstList.size() * percentage);
-        return weakestFirstList.subList(0, offset.intValue());
     }
 
     public GenePool getGenePool() {
@@ -87,8 +82,4 @@ public class Population  {
         collectIndividuals(individuals, oldestGeneration.getChildGeneration());
     }
 
-    public void killAll(Collection<Organism> organisms) {
-        currentGeneration.removeAll(organisms);
-        // TODO iterate all other generations...
-    }
 }

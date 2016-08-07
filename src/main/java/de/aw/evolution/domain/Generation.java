@@ -1,6 +1,6 @@
 package de.aw.evolution.domain;
 
-import de.aw.evolution.domain.actors.EvolutionaryFactorsForReproduction;
+import de.aw.evolution.domain.actors.Reproduction;
 
 import java.util.Iterator;
 import java.util.Optional;
@@ -39,7 +39,7 @@ public class Generation extends Group {
         return childGeneration;
     }
 
-    public Generation createNexGeneration(EvolutionaryFactorsForReproduction reproduction) {
+    public Generation createNexGeneration(Reproduction reproduction) {
         if(childGeneration == null) {
             childGeneration = new Generation(this);
         }
@@ -47,7 +47,7 @@ public class Generation extends Group {
         return childGeneration;
     }
 
-    public void createProgeny(EvolutionaryFactorsForReproduction reproduction) {
+    private void createProgeny(Reproduction reproduction) {
         Group selectedGroup = reproduction.getSelection().apply(this);
         Iterator<Organism> partnerPool = selectedGroup.iterator();
         while(partnerPool.hasNext()) {

@@ -1,11 +1,8 @@
 package de.aw.evolution;
 
 import de.aw.evolution.domain.Environment;
-import de.aw.evolution.domain.Organism;
 import de.aw.evolution.domain.Population;
 import de.aw.evolution.domain.actors.EvolutionaryFactors;
-
-import java.util.Collection;
 
 /**
  *
@@ -38,16 +35,12 @@ public class Evolution {
     public void start() throws PopulationLostException {
         while(true) {
             population.apply(environment);
-            population.apply(evolutionaryFactors.getMutation());
-            population.apply(evolutionaryFactors.getGeneticDrift());
             if(population.size() == 0) {
                 throw new PopulationLostException();
             }
-            Collection<Organism> weakest = population.getWeakest(0.25);
-            population.killAll(weakest);
-            if(population.size() < 100 ) {
-                population.reproduce(evolutionaryFactors.getEvolutionaryFactorsForReproduction());
-            }
+            population.reproduce(evolutionaryFactors.reproduction());
+            population.apply(evolutionaryFactors.mutation());
+            population.apply(evolutionaryFactors.geneticDrift());
         }
     }
 }

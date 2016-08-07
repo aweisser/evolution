@@ -17,17 +17,30 @@ public class Gene {
 
     private final UUID id;
     private final GeneLocus locus;
+    private final GeneticInformation geneticInformation;
 
     public Gene(GeneLocus locus, UUID id) {
+        this(locus, id,  null);
+    }
+
+    public Gene(GeneLocus locus, UUID id, GeneticInformation geneticInformation) {
         if(locus == null || id == null) {
             throw new IllegalArgumentException("Locus and id must be set");
         }
+        if(geneticInformation == null) {
+            geneticInformation = new GeneticInformation.NoGeneticInformation();
+        }
         this.locus = locus;
         this.id = id;
+        this.geneticInformation = geneticInformation;
     }
 
     public GeneLocus getLocus() {
         return locus;
+    }
+
+    public GeneticInformation getGeneticInformation() {
+        return geneticInformation;
     }
 
     @Override
@@ -55,5 +68,12 @@ public class Gene {
         int result = getLocus().hashCode();
         result = 31 * result + id.hashCode();
         return result;
+    }
+
+    /**
+     * @return a new Gene instance with new id but same Locus and genetic information
+     */
+    public Gene clone() {
+        return new Gene(getLocus(), UUID.randomUUID(), getGeneticInformation().clone());
     }
 }

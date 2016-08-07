@@ -6,7 +6,7 @@ import de.aw.evolution.domain.Generation;
 import de.aw.evolution.domain.Genom;
 import de.aw.evolution.domain.Organism;
 import de.aw.evolution.domain.Phenotype;
-import de.aw.evolution.domain.actors.EvolutionaryFactorsForReproduction;
+import de.aw.evolution.domain.actors.Reproduction;
 import de.aw.evolution.domain.actors.Feature;
 import de.aw.evolution.domain.actors.PartnerSelection;
 import de.aw.evolution.domain.actors.Recombination;
@@ -66,10 +66,10 @@ public abstract class TestDataBuilder {
         return new TestFeature();
     }
 
-    public static EvolutionaryFactorsForReproduction defaultEvolutionaryFactorsForReproduction() {
+    public static Reproduction defaultEvolutionaryFactorsForReproduction() {
         Selection selection = organisms -> organisms;
         PartnerSelection partnerSelection = organisms -> Optional.of(organisms.iterator().next());
         Recombination recombination = couple -> couple.getMother();
-        return new EvolutionaryFactorsForReproduction(selection, partnerSelection, recombination);
+        return new Reproduction(selection, partnerSelection, recombination);
     }
 }

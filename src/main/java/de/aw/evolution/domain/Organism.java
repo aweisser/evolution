@@ -50,7 +50,7 @@ public class Organism {
      * @param environment
      */
     public void modifyPhenotype(Environment environment, Modification modification) {
-        Genom readOnlyGenom = Genom.copyOf(this.genom); // this.genom should not be modified
+        Genom readOnlyGenom = this.genom.clone(); // this.genom should not be modified
         modification.apply(environment, phenotype, readOnlyGenom);
     }
 

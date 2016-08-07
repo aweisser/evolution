@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -17,22 +18,22 @@ import java.util.TreeSet;
  */
 public class Genom {
 
-    private final Set<Gene> genes = new TreeSet<>(genelocusComparator());
-
-    private Comparator<Gene> genelocusComparator() {
-        return (g1, g2) -> g1.getLocus().compareTo(g2.getLocus());
-    }
+    private final Set<Gene> genes;
 
     public Genom(Collection<Gene> genes) {
-        this.genes.addAll(genes);
+        this.genes = genes.stream().collect(Collectors.toSet());
     }
 
     public Set<Gene> getGenes() {
         return Collections.unmodifiableSet(genes);
     }
 
-    public static Genom copyOf(Genom genom) {
-        return new Genom(genom.getGenes());
+    /**
+     * @return a real copy (with new Gene instances)
+     */
+    public Genom clone() {
+        Set<Gene> copy = getGenes().stream().map(g -> g.clone()).collect(Collectors.toSet());
+        return new Genom(copy);
     }
 
 }

@@ -52,6 +52,12 @@ public class GeneTest {
         assertThat(gene.toString(), containsString(id.toString()));
     }
 
+    @Test
+    public void aGeneWithoutGeneticInformationIsInitializedWith_NoGeneticInformation() {
+        Gene gene = new Gene(new GeneLocus(1), UUID.randomUUID());
+        assertThat(gene.getGeneticInformation(), is(equalTo(new GeneticInformation.NoGeneticInformation())));
+    }
+
 
 
 }
