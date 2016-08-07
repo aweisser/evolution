@@ -1,11 +1,6 @@
-package de.aw.evolution.domain.actors;
+package de.aw.evolution.domain.factors;
 
-import com.sun.javafx.sg.prism.NGGroup;
-import de.aw.evolution.domain.Genom;
 import de.aw.evolution.domain.Group;
-import sun.java2d.windows.GDIRenderer;
-
-import java.util.Set;
 
 /**
  * Selektion ist einer der Evolutionsfaktoren.

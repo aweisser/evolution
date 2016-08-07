@@ -6,11 +6,11 @@ import de.aw.evolution.domain.Generation;
 import de.aw.evolution.domain.Genom;
 import de.aw.evolution.domain.Organism;
 import de.aw.evolution.domain.Phenotype;
-import de.aw.evolution.domain.actors.Reproduction;
-import de.aw.evolution.domain.actors.Feature;
-import de.aw.evolution.domain.actors.PartnerSelection;
-import de.aw.evolution.domain.actors.Recombination;
-import de.aw.evolution.domain.actors.Selection;
+import de.aw.evolution.domain.factors.Reproduction;
+import de.aw.evolution.domain.factors.Feature;
+import de.aw.evolution.domain.factors.PartnerSelection;
+import de.aw.evolution.domain.factors.Recombination;
+import de.aw.evolution.domain.factors.Selection;
 
 import java.util.List;
 import java.util.Optional;

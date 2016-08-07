@@ -1,6 +1,6 @@
 package de.aw.evolution.domain;
 
-import de.aw.evolution.domain.actors.Reproduction;
+import de.aw.evolution.domain.factors.Reproduction;
 
 import java.util.Iterator;
 import java.util.Optional;

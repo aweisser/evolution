@@ -8,6 +8,7 @@ import static de.aw.evolution.domain.data.TestDataBuilder.asSet;
 import static de.aw.evolution.domain.data.TestDataBuilder.defaultEvolutionaryFactorsForReproduction;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 /**
  * @author armin.weisser
@@ -21,7 +22,7 @@ public class PopulationTest {
 
         Generation generation1 = Generation.createFirstGeneration();
         Population population = new Population(generation1);
-        Generation generation2 = population.reproduce(defaultEvolutionaryFactorsForReproduction());
+        Generation generation2 = population.apply(defaultEvolutionaryFactorsForReproduction());
 
         Gene brownHairGene = aGeneAtLocus(1);
         Gene blackHairGene = aGeneAtLocus(1);
@@ -45,9 +46,9 @@ public class PopulationTest {
 
     }
 
-    @Test(expected = Exception.class)
-    public void aPopulationMustHaveAFirstGeneration() {
-        new Population(null);
+    @Test
+    public void aPopulationHasAGeneration() {
+        assertThat(new Population().getCurrentGeneration(), is(notNullValue()));
     }
 
 }

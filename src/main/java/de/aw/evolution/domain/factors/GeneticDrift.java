@@ -1,7 +1,5 @@
-package de.aw.evolution.domain.actors;
+package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.GenePool;
-import de.aw.evolution.domain.Genom;
 import de.aw.evolution.domain.Population;
 
 /**

@@ -1,6 +1,6 @@
 package de.aw.evolution.domain;
 
-import de.aw.evolution.domain.actors.Feature;
+import de.aw.evolution.domain.factors.Feature;
 
 import java.util.HashSet;
 

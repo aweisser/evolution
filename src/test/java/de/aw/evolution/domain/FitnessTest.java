@@ -12,7 +12,7 @@ public class FitnessTest {
 
     @Test
     public void theGreaterTheFitter() {
-        assertThat(new Fitness(2), is(greaterThan(new Fitness(1))));
+        assertThat(new Fitness(0.2), is(greaterThan(new Fitness(0.1))));
     }
 
     @Test
@@ -21,18 +21,13 @@ public class FitnessTest {
     }
 
     @Test
-    public void negativeFitnessIsNotEqualToPostiveFitness() {
-        assertThat(new Fitness(-1), is(not(equalTo(new Fitness(1)))));
-    }
-
-    @Test
     public void hashCodeIsEqualToValuesHashCode() {
-        assertThat(new Fitness(1).hashCode(), is(equalTo(new Long(1).hashCode())));
+        assertThat(new Fitness(1).hashCode(), is(equalTo(new Double(1).hashCode())));
     }
 
     @Test
     public void hashValuesDiffer() {
-        assertThat(new Fitness(1).hashCode(), is(not(equalTo(new Fitness(2).hashCode()))));
+        assertThat(new Fitness(0.1).hashCode(), is(not(equalTo(new Fitness(0.2).hashCode()))));
     }
 
     @Test(expected = Exception.class)

@@ -1,6 +1,6 @@
 package de.aw.evolution.domain.data;
 
-import de.aw.evolution.domain.actors.Feature;
+import de.aw.evolution.domain.factors.Feature;
 
 /**
  * @author armin.weisser

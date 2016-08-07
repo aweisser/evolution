@@ -2,7 +2,7 @@ package de.aw.evolution;
 
 import de.aw.evolution.domain.Environment;
 import de.aw.evolution.domain.Population;
-import de.aw.evolution.domain.actors.EvolutionaryFactors;
+import de.aw.evolution.domain.factors.EvolutionaryFactors;
 
 /**
  *
@@ -35,10 +35,11 @@ public class Evolution {
     public void start() throws PopulationLostException {
         while(true) {
             population.apply(environment);
+            population.apply(evolutionaryFactors.death());
             if(population.size() == 0) {
                 throw new PopulationLostException();
             }
-            population.reproduce(evolutionaryFactors.reproduction());
+            population.apply(evolutionaryFactors.reproduction());
             population.apply(evolutionaryFactors.mutation());
             population.apply(evolutionaryFactors.geneticDrift());
         }

@@ -1,4 +1,4 @@
-package de.aw.evolution.domain.actors;
+package de.aw.evolution.domain.factors;
 
 import de.aw.evolution.domain.Group;
 import de.aw.evolution.domain.Organism;

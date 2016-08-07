@@ -1,6 +1,6 @@
 package de.aw.evolution.domain;
 
-import de.aw.evolution.domain.actors.Modification;
+import de.aw.evolution.domain.factors.Modification;
 
 /**
  * @author armin.weisser
@@ -10,8 +10,7 @@ public class Organism {
     protected final Genom genom;
 
     /*
-        A Phenotype is unique per Organism.
-        It's features may change due to Modification ...
+        A Phenotype is unique per Organism. The "features" may change due to Modification ...
     */
     protected final Phenotype phenotype;
 

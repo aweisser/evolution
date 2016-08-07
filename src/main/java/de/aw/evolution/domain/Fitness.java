@@ -6,18 +6,22 @@ package de.aw.evolution.domain;
  */
 public class Fitness implements Comparable<Fitness> {
 
-    private Long value;
+    private Double value;
 
     /**
-     * @param value the larger the fitter
+     * @param value The greater the fitter.
      */
-    public Fitness(long value) {
+    public Fitness(double value) {
         this();
         this.value = value;
     }
 
     private Fitness() {
 
+    }
+
+    public Double getValue() {
+        return value;
     }
 
     @Override

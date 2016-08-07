@@ -1,4 +1,4 @@
-package de.aw.evolution.domain.actors;
+package de.aw.evolution.domain.factors;
 
 /**
  * @author armin.weisser

@@ -1,8 +1,9 @@
 package de.aw.evolution.domain;
 
-import de.aw.evolution.domain.actors.Reproduction;
-import de.aw.evolution.domain.actors.GeneticDrift;
-import de.aw.evolution.domain.actors.Mutation;
+import de.aw.evolution.domain.factors.Death;
+import de.aw.evolution.domain.factors.GeneticDrift;
+import de.aw.evolution.domain.factors.Mutation;
+import de.aw.evolution.domain.factors.Reproduction;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,37 +21,56 @@ public class Population  {
 
     private Generation currentGeneration;
 
+    public Population() {
+        this(null);
+    }
     /**
-     * @param startGeneration mandatory. May not be null.
+     * @param startGeneration - if null a new, empty Generation will be created.
      */
     public Population(Generation startGeneration) {
         if(startGeneration == null) {
-            throw new IllegalArgumentException("The first generation may not be null");
+            startGeneration = Generation.createFirstGeneration();
         }
         this.currentGeneration = startGeneration;
     }
 
     /**
-     * Applying the environment to the population will kill some individuals.
-     * The die rate depends on the fitness of each organism.
+     * Applying the environment to the population will define the fitness of each individual.
      *
      * @param environment
      */
     public void apply(Environment environment) {
-        // TODO let the environmental factors affect the fitness of the population
+        getIndividuals().forEach(organism -> {
+            Fitness fitness = environment.apply(organism);
+            organism.setFitness(fitness);
+        });
     }
 
-    public void apply(GeneticDrift geneticDrift) {
-        // TODO let a GeneticDrift affect the GenPool of the population
+    /**
+     * Applying Death to the population will propably erase some of the individuals
+     *
+     * @param death
+     */
+    public void apply(Death death) {
+        apply(death, oldestGeneration(this.currentGeneration));
+    }
+
+    private void apply(Death death, Generation parentGeneration) {
+        death.apply(parentGeneration);
+        apply(death, parentGeneration.getChildGeneration());
+    }
+
+    public Generation apply(Reproduction reproduction) {
+        currentGeneration = currentGeneration.createNexGeneration(reproduction);
+        return currentGeneration;
     }
 
     public void apply(Mutation mutation) {
-        // TODO let a Mutation affect the GenPool of the population
+        getIndividuals().forEach( organism -> mutation.apply(organism.getGenom()));
     }
 
-    public Generation reproduce(Reproduction reproduction) {
-        currentGeneration = currentGeneration.createNexGeneration(reproduction);
-        return currentGeneration;
+    public void apply(GeneticDrift geneticDrift) {
+        geneticDrift.apply(this);
     }
 
     public GenePool getGenePool() {
@@ -82,4 +102,7 @@ public class Population  {
         collectIndividuals(individuals, oldestGeneration.getChildGeneration());
     }
 
+    public Generation getCurrentGeneration() {
+        return currentGeneration;
+    }
 }
