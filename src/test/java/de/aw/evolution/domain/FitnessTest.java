@@ -2,8 +2,13 @@ package de.aw.evolution.domain;
 
 import org.junit.Test;
 
+import static de.aw.evolution.domain.data.TestDataBuilder.aFitnessOf;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 /**
  * @author armin.weisser
@@ -12,32 +17,36 @@ public class FitnessTest {
 
     @Test
     public void theGreaterTheFitter() {
-        assertThat(new Fitness(0.2), is(greaterThan(new Fitness(0.1))));
+        assertThat(aFitnessOf(0.2), is(greaterThan(aFitnessOf(0.1))));
     }
 
     @Test
     public void zeroFitnessIsOkAndEqualsAnotherZeroFitness() {
-        assertThat(new Fitness(0), is(equalTo(new Fitness(0))));
+        assertThat(aFitnessOf(0), is(equalTo(aFitnessOf(0))));
     }
 
     @Test
     public void hashCodeIsEqualToValuesHashCode() {
-        assertThat(new Fitness(1).hashCode(), is(equalTo(new Double(1).hashCode())));
+        assertThat(aFitnessOf(1).hashCode(), is(equalTo(new Double(1).hashCode())));
     }
 
     @Test
     public void hashValuesDiffer() {
-        assertThat(new Fitness(0.1).hashCode(), is(not(equalTo(new Fitness(0.2).hashCode()))));
+        assertThat(aFitnessOf(0.1).hashCode(), is(not(equalTo(aFitnessOf(0.2).hashCode()))));
     }
 
     @Test(expected = Exception.class)
     public void emptyFitnessCanNotBeCompared() {
-        new Fitness.EmptyFitness().compareTo(new Fitness(1));
+        new Fitness.EmptyFitness().compareTo(aFitnessOf(1));
     }
 
     @Test(expected = Exception.class)
     public void emptyFitnessCanNotBeComparedTo() {
-        new Fitness(1).compareTo(new Fitness.EmptyFitness());
+        aFitnessOf(1).compareTo(new Fitness.EmptyFitness());
     }
 
+    @Test
+    public void shouldHaveAStringRepresentationHoldingTheFitnessValue() {
+        assertThat(aFitnessOf(0.12345).toString(), containsString("0.12345"));
+    }
 }

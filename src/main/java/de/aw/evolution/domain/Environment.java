@@ -2,7 +2,6 @@ package de.aw.evolution.domain;
 
 import de.aw.evolution.domain.factors.EnvironmentalFactor;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.function.Function;
 
@@ -32,11 +31,16 @@ public class Environment extends HashMap<EnvironmentalFactor, Integer> implement
     public double weightedFitnessValue(Organism organism, EnvironmentalFactor environmentalFactor, Integer weight) {
         Double fitnessValue = environmentalFactor.apply(organism).getValue();
         Double factor = factor(weight);
-        return fitnessValue * factor;
+        double weightedFitness = fitnessValue * factor;
+        return weightedFitness;
     }
 
     public double factor(Integer weight) {
-        return new BigDecimal(weight).divide(new BigDecimal(size())).doubleValue();
+        return weight/(double)getWeightSum();
+    }
+
+    private Integer getWeightSum() {
+        return values().stream().mapToInt(v->v).sum();
     }
 
 }
