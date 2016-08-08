@@ -88,5 +88,13 @@ public class PopulationTest {
         assertThat(initialGenePool, is(not(equalTo(modifiedGenePool))));
     }
 
+    @Test
+    public void anIdentiyMutationShouldNotChangeTheGenPool() {
+        Population population = new Population(aGenerationOfSize(2));
+        GenePool initialGenePool = population.getGenePool();
+        population.apply((Mutation) genom -> genom.clone());
+        GenePool modifiedGenePool = population.getGenePool();
+        assertThat(initialGenePool, is(equalTo(modifiedGenePool)));
+    }
 
 }
