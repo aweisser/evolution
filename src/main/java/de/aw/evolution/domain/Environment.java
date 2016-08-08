@@ -2,7 +2,8 @@ package de.aw.evolution.domain;
 
 import de.aw.evolution.domain.factors.EnvironmentalFactor;
 
-import java.util.HashSet;
+import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.function.Function;
 
 /**
@@ -11,15 +12,31 @@ import java.util.function.Function;
  *
  * @author armin.weisser
  */
-public class Environment extends HashSet<EnvironmentalFactor> implements Function<Organism, Fitness> {
+public class Environment extends HashMap<EnvironmentalFactor, Integer> implements Function<Organism, Fitness> {
 
     @Override
     public Fitness apply(Organism organism) {
-        // TODO introduce weight on EnvironmentalFactors
-        double totalFitness = stream()
-                .mapToDouble(ef -> ef.apply(organism).getValue())
-                .reduce(0, (a, b) -> (a + b) / 2); // TODO make this a weighted average
-        return new Fitness(totalFitness);
+        if(isEmpty()) {
+            return new Fitness(1);
+        }
+        return weightedFitness(organism);
+    }
+
+    public Fitness weightedFitness(Organism organism) {
+        double weightedFitnessValue = entrySet().stream()
+                .mapToDouble(entry -> weightedFitnessValue(organism, entry.getKey(), entry.getValue()))
+                .sum();
+        return new Fitness(weightedFitnessValue);
+    }
+
+    public double weightedFitnessValue(Organism organism, EnvironmentalFactor environmentalFactor, Integer weight) {
+        Double fitnessValue = environmentalFactor.apply(organism).getValue();
+        Double factor = factor(weight);
+        return fitnessValue * factor;
+    }
+
+    public double factor(Integer weight) {
+        return new BigDecimal(weight).divide(new BigDecimal(size())).doubleValue();
     }
 
 }

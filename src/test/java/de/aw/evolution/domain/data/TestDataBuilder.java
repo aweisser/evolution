@@ -1,15 +1,16 @@
 package de.aw.evolution.domain.data;
 
+import de.aw.evolution.domain.Fitness;
 import de.aw.evolution.domain.Gene;
 import de.aw.evolution.domain.GeneLocus;
 import de.aw.evolution.domain.Generation;
 import de.aw.evolution.domain.Genom;
 import de.aw.evolution.domain.Organism;
 import de.aw.evolution.domain.Phenotype;
-import de.aw.evolution.domain.factors.Reproduction;
 import de.aw.evolution.domain.factors.Feature;
 import de.aw.evolution.domain.factors.PartnerSelection;
 import de.aw.evolution.domain.factors.Recombination;
+import de.aw.evolution.domain.factors.Reproduction;
 import de.aw.evolution.domain.factors.Selection;
 
 import java.util.List;
@@ -71,5 +72,9 @@ public abstract class TestDataBuilder {
         PartnerSelection partnerSelection = organisms -> Optional.of(organisms.iterator().next());
         Recombination recombination = couple -> couple.getMother();
         return new Reproduction(selection, partnerSelection, recombination);
+    }
+
+    public static Fitness aFitnessOf(double value) {
+        return new Fitness(value);
     }
 }

@@ -52,4 +52,10 @@ public class Fitness implements Comparable<Fitness> {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Fitness{" +
+                "value=" + value +
+                '}';
+    }
 }
