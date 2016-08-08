@@ -56,8 +56,11 @@ public class Population  {
     }
 
     private void apply(Death death, Generation parentGeneration) {
-        death.apply(parentGeneration);
-        apply(death, parentGeneration.getChildGeneration());
+        if(parentGeneration != null) {
+            Group dead = death.apply(parentGeneration);
+            parentGeneration.removeAll(dead);
+            apply(death, parentGeneration.getChildGeneration());
+        }
     }
 
     public Generation apply(Reproduction reproduction) {
@@ -66,7 +69,10 @@ public class Population  {
     }
 
     public void apply(Mutation mutation) {
-        getIndividuals().forEach( organism -> mutation.apply(organism.getGenom()));
+        getIndividuals().forEach( organism -> {
+            Genom mutatedGenom = mutation.apply(organism.getGenom());
+            organism.setGenom(mutatedGenom);
+        });
     }
 
     public void apply(GeneticDrift geneticDrift) {

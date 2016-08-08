@@ -7,14 +7,14 @@ import de.aw.evolution.domain.factors.Modification;
  */
 public class Organism {
 
-    protected final Genom genom;
+    private Genom genom;
 
     /*
         A Phenotype is unique per Organism. The "features" may change due to Modification ...
     */
-    protected final Phenotype phenotype;
+    private final Phenotype phenotype;
 
-    protected final Generation generation;
+    private final Generation generation;
 
     private Fitness fitness = new Fitness.EmptyFitness();
 
@@ -40,6 +40,10 @@ public class Organism {
         return genom;
     }
 
+    public void setGenom(Genom genom) {
+        this.genom = genom;
+    }
+
     /**
      * Der Phänotyp wird durch das Zusammenwirken von Erbanlagen und Umweltfaktoren bestimmt.
      * Die Veränderung des Phänotyps durch Umweltfaktoren wird Modifikation genannt.
@@ -63,5 +67,9 @@ public class Organism {
 
     public void setFitness(Fitness fitness) {
         this.fitness = fitness;
+    }
+
+    public Generation getGeneration() {
+        return generation;
     }
 }

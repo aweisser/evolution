@@ -4,9 +4,14 @@ import org.junit.Test;
 
 import java.util.Collections;
 
-import static de.aw.evolution.domain.data.TestDataBuilder.*;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGeneAtLocus;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGeneLocus;
+import static de.aw.evolution.domain.data.TestDataBuilder.asSet;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 /**
  * @author armin.weisser
@@ -64,9 +69,17 @@ public class AllelTest {
     }
 
     @Test
-    public void theLocusIsTheIdentityOfTheAllel() {
-        Allel allel = new Allel(aGeneLocus(1), asSet(aGeneAtLocus(1)));
-        assertThat(aGeneLocus(1).hashCode(), is(equalTo(allel.hashCode())));
+    public void shouldContainPositionAsPartOfTheStringRepresentation() {
+        Allel allel = new Allel(aGeneLocus(4711), asSet(aGeneAtLocus(4711)));
+        assertThat(allel.toString(), containsString("4711"));
     }
+
+    @Test
+    public void allelsWithSamePositionAndGenesHaveEqualHashValues() {
+        Allel allel1 = new Allel(aGeneLocus(4711), asSet(aGeneAtLocus(4711)));
+        Allel allel2 = new Allel(aGeneLocus(4711), asSet(aGeneAtLocus(4711)));
+        assertThat(allel1.hashCode(), is(equalTo(allel2.hashCode())));
+    }
+
 
 }

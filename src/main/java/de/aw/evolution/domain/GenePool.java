@@ -15,9 +15,8 @@ public class GenePool {
 
     private final Map<GeneLocus, Allel> allels = new HashMap<>();
 
-    private GenePool() {
-
-    }
+    /* Use the factory method to create GenePool */
+    private GenePool() {}
 
     public boolean contains(Gene gene) {
         Allel allel = allels.get(gene.getLocus());
@@ -35,7 +34,7 @@ public class GenePool {
     }
 
     private static void collectAlles(GenePool genePool, Organism organism) {
-        organism.getGenom().getGenes().forEach(g -> addGene(genePool.allels, g));
+        organism.getGenom().forEach(g -> addGene(genePool.allels, g));
     }
 
     private static void addGene(Map<GeneLocus, Allel> allels, Gene gene) {
@@ -45,5 +44,29 @@ public class GenePool {
         } else {
             allels.get(gene.getLocus()).addVariation(gene);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "GenePool{" +
+                "allelSize=" + allels.size() +
+                ", allels=" + allels +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GenePool)) return false;
+
+        GenePool genePool = (GenePool) o;
+
+        return allels.equals(genePool.allels);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return allels.hashCode();
     }
 }

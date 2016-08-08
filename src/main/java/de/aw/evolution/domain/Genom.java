@@ -1,10 +1,10 @@
 package de.aw.evolution.domain;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -16,24 +16,34 @@ import java.util.stream.Collectors;
  *
  * @author armin.weisser
  */
-public class Genom {
+public class Genom implements Iterable<Gene> {
 
-    private final Set<Gene> genes;
+    private final HashMap<GeneLocus, Gene> dna = new HashMap<>();
 
     public Genom(Collection<Gene> genes) {
-        this.genes = genes.stream().collect(Collectors.toSet());
+        genes.forEach(this::addOrReplaceGen);
     }
 
-    public Set<Gene> getGenes() {
-        return Collections.unmodifiableSet(genes);
+    @Override
+    public Iterator<Gene> iterator() {
+        return dna.values().iterator();
+    }
+
+    public int size() {
+        return dna.size();
     }
 
     /**
      * @return a real copy (with new Gene instances)
      */
     public Genom clone() {
-        Set<Gene> copy = getGenes().stream().map(g -> g.clone()).collect(Collectors.toSet());
+        Set<Gene> copy = dna.values().stream().map(g -> g.clone()).collect(Collectors.toSet());
         return new Genom(copy);
     }
 
+    public Optional<Gene> addOrReplaceGen(Gene newGene) {
+        Optional<Gene> replacedGene = Optional.ofNullable(dna.get(newGene.getLocus()));
+        dna.put(newGene.getLocus(), newGene);
+        return replacedGene;
+    }
 }

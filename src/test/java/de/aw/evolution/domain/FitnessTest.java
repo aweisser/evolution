@@ -41,6 +41,12 @@ public class FitnessTest {
     }
 
     @Test(expected = Exception.class)
+    public void emptyFitnessDoesNotHaveValue() {
+        new Fitness.EmptyFitness().getValue();
+    }
+
+
+    @Test(expected = Exception.class)
     public void emptyFitnessCanNotBeComparedTo() {
         aFitnessOf(1).compareTo(new Fitness.EmptyFitness());
     }

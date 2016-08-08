@@ -2,9 +2,12 @@ package de.aw.evolution.domain;
 
 import org.junit.Test;
 
-import static de.aw.evolution.domain.data.TestDataBuilder.*;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGenom;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
 
 /**
  * @author armin.weisser
@@ -12,12 +15,14 @@ import static org.hamcrest.Matchers.*;
 public class GenomTest {
 
     @Test
-    public void aCopyOfAGenomIsACopyOfAlGenes() {
+    public void aCopyOfAGenomIsACopyOfAllGenes() {
         Genom genom = aGenom();
         Genom copy = genom.clone();
-        assertThat(copy.getGenes(), is(not(equalTo(genom.getGenes()))));
-        assertThat(copy.getGenes(), is(not(sameInstance(genom.getGenes()))));
-        assertThat(copy.getGenes(), hasSize(genom.getGenes().size()));
+        assertThat(copy, is(not(sameInstance(genom))));
+        assertThat(copy.size(), is(equalTo(genom.size())));
+
+
+
     }
 
 }

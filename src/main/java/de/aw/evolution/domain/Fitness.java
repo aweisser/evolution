@@ -46,6 +46,12 @@ public class Fitness implements Comparable<Fitness> {
     }
 
     public static class EmptyFitness extends Fitness {
+
+        @Override
+        public Double getValue() {
+            throw new UnsupportedOperationException("An EmptyFitness does not have a value");
+        }
+
         @Override
         public int compareTo(Fitness other) {
             throw new UnsupportedOperationException("You can't compare an EmptyFitness.");

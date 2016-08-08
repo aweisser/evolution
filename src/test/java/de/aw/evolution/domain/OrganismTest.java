@@ -2,9 +2,12 @@ package de.aw.evolution.domain;
 
 import org.junit.Test;
 
-import static de.aw.evolution.domain.data.TestDataBuilder.*;
+import static de.aw.evolution.domain.data.TestDataBuilder.aFeature;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGeneration;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGenom;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 /**
  * @author armin.weisser
@@ -24,7 +27,7 @@ public class OrganismTest {
         phenotype.add(aFeature());
 
         assertThat(phenotype.size(), is(equalTo(3)));
-        assertThat(organism.phenotype.size(), is(equalTo(2)));
+        assertThat(organism.getPhenotype().size(), is(equalTo(2)));
     }
 
 

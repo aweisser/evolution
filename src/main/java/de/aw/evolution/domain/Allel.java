@@ -80,6 +80,7 @@ public class Allel {
         return false;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,12 +88,23 @@ public class Allel {
 
         Allel allel = (Allel) o;
 
-        return getGeneLocus().equals(allel.getGeneLocus());
+        if (!getGeneLocus().equals(allel.getGeneLocus())) return false;
+        return varitions.equals(allel.varitions);
 
     }
 
     @Override
     public int hashCode() {
-        return getGeneLocus().hashCode();
+        int result = getGeneLocus().hashCode();
+        result = 31 * result + varitions.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Allel{" +
+                "geneLocus=" + geneLocus +
+                ", varitions=" + varitions.size() +
+                '}';
     }
 }

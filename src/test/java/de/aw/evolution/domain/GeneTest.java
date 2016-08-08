@@ -2,10 +2,13 @@ package de.aw.evolution.domain;
 
 import org.junit.Test;
 
-import java.util.UUID;
-
+import static de.aw.evolution.domain.data.TestDataBuilder.aGeneAtLocus;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGeneticInformation;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 /**
  * @author armin.weisser
@@ -14,47 +17,38 @@ public class GeneTest {
 
     @Test(expected = Exception.class)
     public void aGeneMustHaveGenlocus() {
-        new Gene(null, UUID.randomUUID());
-    }
-
-    @Test(expected = Exception.class)
-    public void aGeneMustHaveAnId() {
-        new Gene(new GeneLocus(1), null);
+        new Gene(null);
     }
 
     @Test
     public void genesWithSameIdAndLocusAreEqual() {
-        UUID id = UUID.randomUUID();
         GeneLocus locus = new GeneLocus(1);
-        assertThat(new Gene(locus, id), is(equalTo(new Gene(locus, id))));
+        assertThat(new Gene(locus), is(equalTo(new Gene(locus))));
     }
 
     @Test
-    public void genesWithDifferentIdAndLocusAreNotEqual() {
-        UUID id1 = UUID.randomUUID();
-        UUID id2 = UUID.randomUUID();
-        GeneLocus locus = new GeneLocus(1);
-        assertThat(new Gene(locus, id1), is(not(equalTo(new Gene(locus, id2)))));
+    public void genesWithDifferentGeneticInformationOnSameLocusAreNotEqual() {
+        GeneticInformation<String> data = aGeneticInformation("xxx");
+        GeneticInformation<String> otherData = aGeneticInformation("yyy");
+        assertThat(aGeneAtLocus(1, data), is(not(equalTo(aGeneAtLocus(1, otherData)))));
     }
 
     @Test
-    public void genesWithSameIdAndDifferntLocusAreNotEqual() {
-        UUID id = UUID.randomUUID();
-        GeneLocus locus1 = new GeneLocus(1);
-        GeneLocus locus2 = new GeneLocus(2);
-        assertThat(new Gene(locus1, id), is(not(equalTo(new Gene(locus2, id)))));
+    public void genesWithSameGeneticInformationAndDifferntLocusAreNotEqual() {
+        GeneticInformation<String> data = aGeneticInformation("xxx");
+        assertThat(aGeneAtLocus(1, data), is(not(equalTo(aGeneAtLocus(2, data)))));
     }
 
     @Test
-    public void geneShouldHaveStringRepresantationContainingTheId() {
-        UUID id = UUID.randomUUID();
-        Gene gene = new Gene(new GeneLocus(1), id);
-        assertThat(gene.toString(), containsString(id.toString()));
+    public void geneShouldHaveStringRepresantationContainingTheData() {
+        GeneticInformation<String> data = aGeneticInformation("xxx");
+        Gene gene = aGeneAtLocus(1, data);
+        assertThat(gene.toString(), containsString(data.toString()));
     }
 
     @Test
     public void aGeneWithoutGeneticInformationIsInitializedWith_NoGeneticInformation() {
-        Gene gene = new Gene(new GeneLocus(1), UUID.randomUUID());
+        Gene gene = new Gene(new GeneLocus(1));
         assertThat(gene.getGeneticInformation(), is(equalTo(new GeneticInformation.NoGeneticInformation())));
     }
 
