@@ -9,10 +9,15 @@ import java.util.stream.Collectors;
 
 /**
  *
- * Die gesamte Erbinformation einer Zelle wird Genom genannt.
+ * Als Genom, auch Erbgut eines Lebewesens oder eines Virus, bezeichnet man die Gesamtheit der materiellen Träger der
+ * vererbbaren Informationen einer Zelle.
+ * Im abstrakten Sinn versteht man darunter auch die Gesamtheit der vererbbaren Informationen.
  *
- * Als Genom, auch Erbgut eines Lebewesens oder eines Virus, bezeichnet man die Gesamtheit der
- * materiellen Träger der vererbbaren Informationen.
+ * Der Genotyp (griech. genos „Gattung, Geschlecht“ und typos „Abbild, Muster“) oder das Erbbild eines Organismus
+ * repräsentiert seine exakte genetische Ausstattung, also den individuellen Satz von Genen,
+ * den er im Zellkern in sich trägt und der somit seinen morphologischen und physiologischen Phänotyp bestimmt.
+ *
+ * Der Begriff „Genotyp“ bezieht sich also auf die vollständige Kombination aller Allele / aller Loci eines Organismus.
  *
  * @author armin.weisser
  */

@@ -97,7 +97,7 @@ public abstract class TestDataBuilder {
         return new TestFeature();
     }
 
-    public static Reproduction defaultEvolutionaryFactorsForReproduction() {
+    public static Reproduction defaultReproduction() {
         Selection selection = organisms -> organisms;
         PartnerSelection partnerSelection = organisms -> Optional.of(organisms.iterator().next());
         Recombination recombination = couple -> couple.getMother();

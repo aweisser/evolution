@@ -6,10 +6,11 @@ import de.aw.evolution.domain.Organism;
 import java.util.function.Function;
 
 /**
- * Ein Umweltfaktor beinflusst das Erscheinigungsbild der Organismen und ist Teil der Umwelt.
+ * Ein Umweltfaktor beinflusst das Erscheinigungsbild (Phänotyp) eines Organimus.
+ * Darüber hinaus bestimmt er auch die Fitness. // TODO Seperation of concerns?
  *
  * @author armin.weisser
  */
-public interface EnvironmentalFactor  extends Function<Organism, Fitness> {
+public interface EnvironmentalFactor extends Function<Organism, Fitness> {
 
 }

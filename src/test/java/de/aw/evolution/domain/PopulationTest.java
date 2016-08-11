@@ -11,7 +11,7 @@ import static de.aw.evolution.domain.data.TestDataBuilder.aGenocide;
 import static de.aw.evolution.domain.data.TestDataBuilder.anEnvironment;
 import static de.aw.evolution.domain.data.TestDataBuilder.anOrganism;
 import static de.aw.evolution.domain.data.TestDataBuilder.asSet;
-import static de.aw.evolution.domain.data.TestDataBuilder.defaultEvolutionaryFactorsForReproduction;
+import static de.aw.evolution.domain.data.TestDataBuilder.defaultReproduction;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
@@ -31,7 +31,7 @@ public class PopulationTest {
 
         Generation generation1 = Generation.createFirstGeneration();
         Population population = new Population(generation1);
-        Generation generation2 = population.apply(defaultEvolutionaryFactorsForReproduction());
+        Generation generation2 = population.apply(defaultReproduction());
 
         Gene brownHairGene = aGeneAtLocus(1);
         Gene blackHairGene = aGeneAtLocus(1);

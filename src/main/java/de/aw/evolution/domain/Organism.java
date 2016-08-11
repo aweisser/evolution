@@ -3,15 +3,20 @@ package de.aw.evolution.domain;
 import de.aw.evolution.domain.factors.Modification;
 
 /**
+ * Organismen stellen die einzelnen Individuen einer Population dar.
+ * Ein Organismus kann immer eindeutig einer Generation von Organismen zugeordnet werden.
+ *
+ * Ein Organismus wird beschrieben durch den Genotyp (Erbanlagen) und den Phänotype (Eigenschaften und Erscheinungsbild).
+ * 
  * @author armin.weisser
  */
 public class Organism {
 
     private Genom genom;
 
-    /*
-        A Phenotype is unique per Organism. The "features" may change due to Modification ...
-    */
+    /**
+     * A Phenotype is unique per Organism. The "features" may change due to Modification ...
+     */
     private final Phenotype phenotype;
 
     private final Generation generation;
@@ -30,7 +35,7 @@ public class Organism {
 
         // A Phenotype is unique per Organism. So we create a new, internal instance a asign it to a final variable.
         if(phenotype == null) {
-            this.phenotype = phenotype;
+            this.phenotype = null;
         } else {
             this.phenotype = new Phenotype(phenotype);
         }
@@ -47,14 +52,13 @@ public class Organism {
     /**
      * Der Phänotyp wird durch das Zusammenwirken von Erbanlagen und Umweltfaktoren bestimmt.
      * Die Veränderung des Phänotyps durch Umweltfaktoren wird Modifikation genannt.
-     * Durch die Modifikation verändert sich nur der phenotyp nicht aber das Genom.
+     * Durch die Modifikation verändert sich nur der Phenotyp nicht aber das Genom.
      *
      * @param modification
      * @param environment
      */
     public void modifyPhenotype(Environment environment, Modification modification) {
-        Genom readOnlyGenom = this.genom.clone(); // this.genom should not be modified
-        modification.apply(environment, phenotype, readOnlyGenom);
+        modification.apply(environment, this);
     }
 
     public Phenotype getPhenotype() {

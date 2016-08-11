@@ -1,7 +1,7 @@
 package de.aw.evolution.domain.factors;
 
 import de.aw.evolution.domain.Environment;
-import de.aw.evolution.domain.Genom;
+import de.aw.evolution.domain.Organism;
 import de.aw.evolution.domain.Phenotype;
 
 /**
@@ -13,6 +13,6 @@ import de.aw.evolution.domain.Phenotype;
  */
 public interface Modification {
 
-    void apply(Environment environment, Phenotype phenotype, Genom genom);
+    Phenotype apply(Environment environment, Organism organism);
 
 }

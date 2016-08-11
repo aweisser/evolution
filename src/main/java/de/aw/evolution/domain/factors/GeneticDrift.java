@@ -16,7 +16,7 @@ import de.aw.evolution.domain.Population;
  *
  * DEV-Note:
  * Man kann das nicht wirklich als eine direkte Änderung des GenePool modelieren.
- * Anstelle desssen modellieren wir es als direkte Änderung an der Population.
+ * Anstelle desssen modellieren wir es als direkte und eher zufällige Änderung an der Population.
  * So können wir das plötzliche Aussterben oder ein neues Environment simulieren.
  * Die Änderung am GenePool ist dann implizit.
  *

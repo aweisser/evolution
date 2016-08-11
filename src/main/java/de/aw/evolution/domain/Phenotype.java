@@ -6,8 +6,11 @@ import java.util.HashSet;
 
 /**
  * Der Phänotyp (oder das Erscheinungsbild) ist in der Genetik die Menge aller Merkmale (Features) eines Organismus.
- * Der Phänotyp wird durch das Zusammenwirken von Erbanlagen und Umweltfaktoren (Modifikation) bestimmt.
- * Die Modifikation findet auf dem Organismus statt.
+ * Der Phänotyp wird durch das Zusammenwirken von Erbanlagen (Genotyp) und Umweltfaktoren (Modifikation) bestimmt.
+ *
+ * Ein Großteil des Phänotyps ist durch den Genotyp vorbestimmt.
+ * Die phänotypische Plastizität gibt an, inwieweit der Phänotyp zusätzlich von der Umwelt beeinflusst werden kann.
+ * Beispiel: Bestimmte Gräser wachsen in 1500 m Höhe weniger hoch wie im Tal, obwohl sie den gleichen Genotyp haben.
  *
  * @author armin.weisser
  */
