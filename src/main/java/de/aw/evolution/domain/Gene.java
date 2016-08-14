@@ -13,6 +13,7 @@ package de.aw.evolution.domain;
  */
 public class Gene {
 
+    // TODO is a GeneLocus part of a Gene? Does a Gene have to know where it's located in a Chromosom?
     private final GeneLocus locus;
     private final GeneticInformation geneticInformation;
 

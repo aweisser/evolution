@@ -4,6 +4,8 @@ import de.aw.evolution.domain.Environment;
 import de.aw.evolution.domain.Population;
 import de.aw.evolution.domain.factors.EvolutionaryFactors;
 
+import java.util.logging.Logger;
+
 /**
  *
  * Evolution ist die allmähliche Veränderung der vererbbaren Merkmale einer Population von Lebewesen
@@ -24,6 +26,8 @@ import de.aw.evolution.domain.factors.EvolutionaryFactors;
  */
 public class Evolution {
 
+    private static Logger logger = Logger.getLogger("Evolution");
+
     private final Population population;
     private final Environment environment;
     private final EvolutionaryFactors evolutionaryFactors;
@@ -37,6 +41,7 @@ public class Evolution {
     public void start() throws PopulationLostException {
         while(true) {
             population.apply(environment);
+            logger.info("Average fitness of Population: " + population.getAverageFitness());
             population.apply(evolutionaryFactors.death());
             if(population.size() == 0) {
                 throw new PopulationLostException();

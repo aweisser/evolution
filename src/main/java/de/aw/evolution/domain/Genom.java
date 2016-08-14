@@ -1,11 +1,10 @@
 package de.aw.evolution.domain;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  *
@@ -19,36 +18,52 @@ import java.util.stream.Collectors;
  *
  * Der Begriff „Genotyp“ bezieht sich also auf die vollständige Kombination aller Allele / aller Loci eines Organismus.
  *
+ * Das Genom ist vereinfacht gesagt eine Art Bibliothek, in der die gesammten Erbinformationen liegen.
+ * Die im Genom enthalteten Chromosomen kann man sich als Bücherregale in dieser Bibliothek vorstellen.
+ * während die Gene die Bücher sind und die DNA der Text in den Büchern.
+ * Der GenLocus ist dann die Position im Regal, an dem das Buch zu finden ist.
+ *
  * @author armin.weisser
  */
 public class Genom implements Iterable<Gene> {
 
-    private final HashMap<GeneLocus, Gene> dna = new HashMap<>();
+    // TODO Streng genommen ist ein Genom eine Menge von Chromosomen auf denen die Gene an einem bestimmen Loki liegen
+    // Zumindest haben die meisten Organismen mehrere Chromosomen.
+    // TODO Welche Rolle spielen Chromosomen bei der Fortpflanzung?
+    private final Chromosom chromosom = new Chromosom();
 
-    public Genom(Collection<Gene> genes) {
+    public Genom(Gene... genes) {
+        this(Stream.of(genes).collect(Collectors.toSet()));
+    }
+
+    public Genom(Iterable<Gene> genes) {
         genes.forEach(this::addOrReplaceGen);
     }
 
     @Override
     public Iterator<Gene> iterator() {
-        return dna.values().iterator();
+        return chromosom.values().iterator();
     }
 
     public int size() {
-        return dna.size();
+        return chromosom.size();
     }
 
     /**
      * @return a real copy (with new Gene instances)
      */
     public Genom clone() {
-        Set<Gene> copy = dna.values().stream().map(g -> g.clone()).collect(Collectors.toSet());
+        Set<Gene> copy = chromosom.values().stream().map(g -> g.clone()).collect(Collectors.toSet());
         return new Genom(copy);
     }
 
     public Optional<Gene> addOrReplaceGen(Gene newGene) {
-        Optional<Gene> replacedGene = Optional.ofNullable(dna.get(newGene.getLocus()));
-        dna.put(newGene.getLocus(), newGene);
+        Optional<Gene> replacedGene = Optional.ofNullable(chromosom.get(newGene.getLocus()));
+        chromosom.put(newGene.getLocus(), newGene);
         return replacedGene;
+    }
+
+    public <T> T getGeneticInformationAt(GeneLocus locus, Class<T> clazz) {
+        return (T) chromosom.get(locus).getGeneticInformation().getData();
     }
 }

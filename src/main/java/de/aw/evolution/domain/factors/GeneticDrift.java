@@ -23,4 +23,8 @@ import de.aw.evolution.domain.Population;
  * @author armin.weisser
  */
 public interface GeneticDrift extends EvolutionaryFactor<Population, Population> {
+
+    static GeneticDrift none() {
+        return population -> population;
+    }
 }

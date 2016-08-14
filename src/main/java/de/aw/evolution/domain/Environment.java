@@ -9,6 +9,9 @@ import java.util.function.Function;
  * Die Umwelt, in der sich die Organismen befinden, wird durch eine Menge von Umweltfaktoren beschrieben.
  * Sie können das Erscheinungsbild (Phänotypen) der Organisamen beeinflussen und bestimmen dessen Fitness.
  *
+ * Das Umwelt ist im Modell eine Menge von Umweltfaktoren (key) mit Gewichtung (value).
+ * Höher gewichtete Umweltfaktoren wirken sich bei der Berechnung der Fitness eines Organismus relativ größer aus.
+ *
  * @author armin.weisser
  */
 public class Environment extends HashMap<EnvironmentalFactor, Integer> implements Function<Organism, Fitness> {

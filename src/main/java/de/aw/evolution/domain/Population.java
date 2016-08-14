@@ -6,6 +6,7 @@ import de.aw.evolution.domain.factors.Mutation;
 import de.aw.evolution.domain.factors.Reproduction;
 
 import java.util.HashSet;
+import java.util.OptionalDouble;
 import java.util.Set;
 
 /**
@@ -110,5 +111,18 @@ public class Population  {
 
     public Generation getCurrentGeneration() {
         return currentGeneration;
+    }
+
+    public Fitness getAverageFitness() {
+        double averageFitness = 0;
+        OptionalDouble average = getIndividuals()
+                .stream()
+                .filter(organism -> !(organism.getFitness() instanceof Fitness.EmptyFitness))
+                .mapToDouble(organism -> organism.getFitness().getValue())
+                .average();
+        if(average.isPresent()) {
+            averageFitness = average.getAsDouble();
+        }
+        return new Fitness(averageFitness);
     }
 }

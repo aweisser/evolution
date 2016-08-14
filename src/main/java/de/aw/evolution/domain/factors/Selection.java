@@ -29,4 +29,8 @@ import de.aw.evolution.domain.Group;
  * @author armin.weisser
  */
 public interface Selection extends EvolutionaryFactor<Group, Group> {
+
+    static Selection all() {
+        return group -> group;
+    }
 }

@@ -57,7 +57,7 @@ public class Generation extends Group {
             fatherOptional.ifPresent( father -> {
                 Couple couple = new Couple(mother.getGenom(), father.getGenom());
                 Genom childGenom = reproduction.getRecombination().apply(couple);
-                new Organism(childGeneration, childGenom); // TODO Can we derive a initial Phenotype for this child?
+                new Organism(childGeneration, childGenom, reproduction.getPhenotypeCreator()); // TODO Can we derive a initial Phenotype for this child?
             });
         }
     }

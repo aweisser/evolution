@@ -1,6 +1,7 @@
 package de.aw.evolution.domain;
 
 import de.aw.evolution.domain.factors.Modification;
+import de.aw.evolution.domain.factors.PhenotypeCreator;
 
 /**
  * Organismen stellen die einzelnen Individuen einer Population dar.
@@ -24,7 +25,11 @@ public class Organism {
     private Fitness fitness = new Fitness.EmptyFitness();
 
     public Organism(Generation generation, Genom genom) {
-        this(generation, genom, null);
+        this(generation, genom, (Phenotype)null);
+    }
+
+    public Organism(Generation generation, Genom genom, PhenotypeCreator<Genom> phenotypeCreator) {
+        this(generation, genom, phenotypeCreator.createPhenotypeFrom(genom));
     }
 
     public Organism(Generation generation, Genom genom, Phenotype phenotype) {

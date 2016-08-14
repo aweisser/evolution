@@ -13,6 +13,7 @@ import de.aw.evolution.domain.factors.Death;
 import de.aw.evolution.domain.factors.EnvironmentalFactor;
 import de.aw.evolution.domain.factors.Feature;
 import de.aw.evolution.domain.factors.PartnerSelection;
+import de.aw.evolution.domain.factors.PhenotypeCreator;
 import de.aw.evolution.domain.factors.Recombination;
 import de.aw.evolution.domain.factors.Reproduction;
 import de.aw.evolution.domain.factors.Selection;
@@ -20,6 +21,7 @@ import de.aw.evolution.domain.factors.Selection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,6 +41,10 @@ public abstract class TestDataBuilder {
 
     public static Organism anOrganism(Generation generation) {
         return new Organism(generation, aGenom(), aPhenotype());
+    }
+
+    public static Organism anOrganism(Generation generation, Supplier<Genom> genomSupplier, PhenotypeCreator<Genom> phenotypeCreator) {
+        return new Organism(generation, genomSupplier.get(), phenotypeCreator);
     }
 
     private static Phenotype aPhenotype() {
@@ -101,7 +107,11 @@ public abstract class TestDataBuilder {
         Selection selection = organisms -> organisms;
         PartnerSelection partnerSelection = organisms -> Optional.of(organisms.iterator().next());
         Recombination recombination = couple -> couple.getMother();
-        return new Reproduction(selection, partnerSelection, recombination);
+        return new Reproduction(selection, partnerSelection, recombination, aPhenotypeCreator());
+    }
+
+    public static PhenotypeCreator<Genom> aPhenotypeCreator() {
+        return genes -> aPhenotype();
     }
 
     public static Fitness aFitnessOf(double value) {

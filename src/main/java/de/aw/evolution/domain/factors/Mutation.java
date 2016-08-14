@@ -19,4 +19,8 @@ import de.aw.evolution.domain.Genom;
  */
 public interface Mutation extends EvolutionaryFactor<Genom, Genom> {
 
+    static Mutation none() {
+        return genom -> genom;
+    }
+
 }

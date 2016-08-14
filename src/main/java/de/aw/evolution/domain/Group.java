@@ -7,4 +7,8 @@ import java.util.HashSet;
  */
 public abstract class Group extends HashSet<Organism> {
 
+    public static class EmptyGroup extends Group {
+
+    }
+
 }

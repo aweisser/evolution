@@ -7,4 +7,8 @@ import de.aw.evolution.domain.factors.Feature;
  */
 public class TestFeature implements Feature {
 
+    @Override
+    public Object execute(Object... input) {
+        return null;
+    }
 }
