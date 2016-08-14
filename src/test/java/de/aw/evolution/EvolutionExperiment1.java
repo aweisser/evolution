@@ -19,13 +19,13 @@ import de.aw.evolution.domain.factors.Recombination;
 import de.aw.evolution.domain.factors.Selection;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import java.util.logging.Logger;
 
 import static de.aw.evolution.domain.data.TestDataBuilder.aGeneAtLocus;
 import static de.aw.evolution.domain.data.TestDataBuilder.aGenom;
 import static de.aw.evolution.domain.data.TestDataBuilder.anOrganism;
+
 
 /**
  * Im  Experiment soll eine wahllose Zeichenkette (als initiales Genom) in ein "sinnvolles" Wort verwandelt werden.
@@ -34,9 +34,8 @@ import static de.aw.evolution.domain.data.TestDataBuilder.anOrganism;
  *
  * @author armin.weisser
  */
+@Ignore
 public class EvolutionExperiment1 extends EvolutionFactory {
-
-    private static Logger logger = Logger.getGlobal();
 
     private static final String MEANINGFULL_WORD = "Evolution";
 
@@ -67,7 +66,6 @@ public class EvolutionExperiment1 extends EvolutionFactory {
         for(int i=0;i<100;i++) {
             String randomDNA = RandomStringUtils.randomAlphabetic(MEANINGFULL_WORD.length());
             Gene gene = aGeneAtLocus(1, randomDNA);
-            logger.info(gene.toString());
             anOrganism(firstGeneration, () -> aGenom(gene), createPhenotypeCreator());
         }
         return firstGeneration;
