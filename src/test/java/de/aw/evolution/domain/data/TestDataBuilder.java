@@ -36,7 +36,13 @@ public abstract class TestDataBuilder {
     }
 
     public static Organism anOrganism() {
-        return anOrganism(aGeneration());
+        return anOrganism(anEmptyGeneration());
+    }
+
+    public static Organism anOrganismWith(Fitness fitness, Generation generation) {
+        Organism organism = anOrganism(generation);
+        organism.setFitness(fitness);
+        return organism;
     }
 
     public static Organism anOrganism(Generation generation) {
@@ -78,14 +84,14 @@ public abstract class TestDataBuilder {
     }
 
     public static Generation aGenerationOfSize(Integer size) {
-        Generation generation = aGeneration();
+        Generation generation = anEmptyGeneration();
         for(int i=0;i<size;i++) {
             generation.add(anOrganism(generation));
         }
         return generation;
     }
 
-    public static Generation aGeneration() {
+    public static Generation anEmptyGeneration() {
         return Generation.createFirstGeneration();
     }
 
@@ -105,7 +111,7 @@ public abstract class TestDataBuilder {
 
     public static Reproduction defaultReproduction() {
         Selection selection = organisms -> organisms;
-        PartnerSelection partnerSelection = organisms -> Optional.of(organisms.iterator().next());
+        PartnerSelection partnerSelection = organisms -> organisms.iterator().hasNext() ? Optional.of(organisms.iterator().next()) : Optional.empty();
         Recombination recombination = couple -> couple.getMother();
         return new Reproduction(selection, partnerSelection, recombination, aPhenotypeCreator());
     }

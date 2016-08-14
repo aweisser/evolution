@@ -5,8 +5,8 @@ import org.junit.Test;
 import java.util.Set;
 
 import static de.aw.evolution.domain.data.TestDataBuilder.aGeneAtLocus;
-import static de.aw.evolution.domain.data.TestDataBuilder.aGeneration;
 import static de.aw.evolution.domain.data.TestDataBuilder.aGenom;
+import static de.aw.evolution.domain.data.TestDataBuilder.anEmptyGeneration;
 import static de.aw.evolution.domain.data.TestDataBuilder.anOrganism;
 import static de.aw.evolution.domain.data.TestDataBuilder.asSet;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -47,7 +47,7 @@ public class GenePoolTest {
 
     @Test
     public void shouldEqualOtherGenPoolWithSameGenes() {
-        Generation generation = aGeneration();
+        Generation generation = anEmptyGeneration();
 
         Genom genom1ab = aGenom(aGeneAtLocus(1, "a"), aGeneAtLocus(2, "b"));
         Genom genom1xy = aGenom(aGeneAtLocus(1, "x"), aGeneAtLocus(2, "y"));
@@ -64,7 +64,7 @@ public class GenePoolTest {
 
     @Test
     public void shouldNotEqualOtherGenPoolWithSameGenesAtDifferentLocus() {
-        Generation generation = aGeneration();
+        Generation generation = anEmptyGeneration();
 
         Genom genom1a2b = aGenom(aGeneAtLocus(1, "a"), aGeneAtLocus(2, "b"));
         Genom genom1x2y = aGenom(aGeneAtLocus(1, "x"), aGeneAtLocus(2, "y"));
@@ -88,7 +88,7 @@ public class GenePoolTest {
 
     @Test
     public void shouldNotEqualOtherGenPoolWithDifferentGenesAtSameLocus() {
-        Generation generation = aGeneration();
+        Generation generation = anEmptyGeneration();
 
         Genom genom1a2b = aGenom(aGeneAtLocus(1, "a"), aGeneAtLocus(2, "b"));
         Genom genom1x2y = aGenom(aGeneAtLocus(1, "x"), aGeneAtLocus(2, "y"));

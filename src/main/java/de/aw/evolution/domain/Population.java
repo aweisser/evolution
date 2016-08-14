@@ -101,12 +101,12 @@ public class Population  {
         return oldestGeneration(generation.getParentGeneration());
     }
 
-    private static void collectIndividuals(Set<Organism> individuals, Generation oldestGeneration) {
-        if(oldestGeneration == null) {
+    private static void collectIndividuals(Set<Organism> individuals, Generation parentGeneration) {
+        if(parentGeneration == null) {
             return;
         }
-        individuals.addAll(oldestGeneration);
-        collectIndividuals(individuals, oldestGeneration.getChildGeneration());
+        individuals.addAll(parentGeneration);
+        collectIndividuals(individuals, parentGeneration.getChildGeneration());
     }
 
     public Generation getCurrentGeneration() {
@@ -114,6 +114,12 @@ public class Population  {
     }
 
     public Fitness getAverageFitness() {
+        if(size() == 0) {
+            return new Fitness.EmptyFitness();
+        }
+        if(getIndividuals().stream().allMatch( o -> o.getFitness().isEmpty())) {
+            return new Fitness.EmptyFitness();
+        }
         double averageFitness = 0;
         OptionalDouble average = getIndividuals()
                 .stream()
@@ -124,5 +130,14 @@ public class Population  {
             averageFitness = average.getAsDouble();
         }
         return new Fitness(averageFitness);
+    }
+
+    @Override
+    public String toString() {
+        return "Population{" +
+                "size=" + size() +
+                ", currentGeneration=" + currentGeneration.getLevel() +
+                ", averageFitness=" + getAverageFitness() +
+                '}';
     }
 }

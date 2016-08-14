@@ -41,7 +41,7 @@ public class Evolution {
     public void start() throws PopulationLostException {
         while(true) {
             population.apply(environment);
-            logger.info("Average fitness of Population: " + population.getAverageFitness());
+            logger.info(population.toString());
             population.apply(evolutionaryFactors.death());
             if(population.size() == 0) {
                 throw new PopulationLostException();

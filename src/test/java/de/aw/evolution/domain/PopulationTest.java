@@ -5,14 +5,18 @@ import org.junit.Test;
 
 import java.util.UUID;
 
+import static de.aw.evolution.domain.data.TestDataBuilder.aFitnessOf;
 import static de.aw.evolution.domain.data.TestDataBuilder.aGeneAtLocus;
 import static de.aw.evolution.domain.data.TestDataBuilder.aGenerationOfSize;
 import static de.aw.evolution.domain.data.TestDataBuilder.aGenocide;
+import static de.aw.evolution.domain.data.TestDataBuilder.anEmptyGeneration;
 import static de.aw.evolution.domain.data.TestDataBuilder.anEnvironment;
 import static de.aw.evolution.domain.data.TestDataBuilder.anOrganism;
+import static de.aw.evolution.domain.data.TestDataBuilder.anOrganismWith;
 import static de.aw.evolution.domain.data.TestDataBuilder.asSet;
 import static de.aw.evolution.domain.data.TestDataBuilder.defaultReproduction;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
@@ -26,8 +30,6 @@ public class PopulationTest {
 
     @Test
     public void aPopulationsGenePoolContainsAllGenesOfAllGenerations() {
-
-        Phenotype phenotype = null;
 
         Generation generation1 = Generation.createFirstGeneration();
         Population population = new Population(generation1);
@@ -53,6 +55,8 @@ public class PopulationTest {
                     blueEyesGene,
                     greenEyesGene)), is(true));
     }
+
+
 
     @Test
     public void aPopulationHasAGeneration() {
@@ -97,4 +101,46 @@ public class PopulationTest {
         assertThat(initialGenePool, is(equalTo(modifiedGenePool)));
     }
 
+    @Test
+    public void avgFitnessOfEmptyPopulationShouldBeAnEmptyFitness() {
+        Population population = new Population(anEmptyGeneration());
+        assertThat(population.getAverageFitness(), instanceOf(Fitness.EmptyFitness.class));
+    }
+
+    @Test
+    public void avgFitnessOfNonEmptyPopulationWhereAllOrganismsHaveEmptyFitnessShouldBeAnEmptyFitness() {
+        Population population = new Population(aGenerationOfSize(2));
+        population.getIndividuals().forEach( o -> assertThat(o.getFitness(), instanceOf(Fitness.EmptyFitness.class)));
+        assertThat(population.getAverageFitness(), instanceOf(Fitness.EmptyFitness.class));
+    }
+
+
+    @Test
+    public void avgFitnessOfNonEmptyPopulationShouldIgnoreOrganismsWithEmptyFitness() {
+        Population population = new Population(anEmptyGeneration());
+        anOrganism(population.getCurrentGeneration());
+        anOrganismWith(aFitnessOf(0), population.getCurrentGeneration());
+        anOrganismWith(aFitnessOf(1), population.getCurrentGeneration());
+
+        assertThat(population.getAverageFitness(), is(equalTo(aFitnessOf(0.5))));
+    }
+
+
+    @Test
+    public void populationStringRepresentationShouldContainAverageFitness() {
+        Population population = new Population(anEmptyGeneration());
+        assertThat(population.toString(), containsString("averageFitness"));
+    }
+
+    @Test
+    public void populationStringRepresentationShouldContainAverageSize() {
+        Population population = new Population(anEmptyGeneration());
+        assertThat(population.toString(), containsString("size"));
+    }
+
+    @Test
+    public void populationStringRepresentationShouldContainCurrentGeneration() {
+        Population population = new Population(anEmptyGeneration());
+        assertThat(population.toString(), containsString("currentGeneration"));
+    }
 }

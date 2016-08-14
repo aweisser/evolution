@@ -31,6 +31,10 @@ public class Generation extends Group {
         this.parentGeneration = parentGeneration;
     }
 
+    public Long getLevel() {
+        return level;
+    }
+
     public Generation getParentGeneration() {
         return parentGeneration;
     }
@@ -48,7 +52,7 @@ public class Generation extends Group {
     }
 
     private void createProgeny(Reproduction reproduction) {
-        Group selectedGroup = reproduction.getSelection().apply(this);
+        Group selectedGroup = (Group) reproduction.getSelection().apply(this).clone();
         Iterator<Organism> partnerPool = selectedGroup.iterator();
         while(partnerPool.hasNext()) {
             Organism mother = partnerPool.next();

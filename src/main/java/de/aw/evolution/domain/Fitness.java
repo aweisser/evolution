@@ -45,6 +45,15 @@ public class Fitness implements Comparable<Fitness> {
         return this.value.compareTo(other.value);
     }
 
+    public boolean isEmpty() {
+        return value == null;
+    }
+
+    @Override
+    public String toString() {
+        return value == null ? "empty" : value.toString();
+    }
+
     public static class EmptyFitness extends Fitness {
 
         @Override
@@ -58,10 +67,5 @@ public class Fitness implements Comparable<Fitness> {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Fitness{" +
-                "value=" + value +
-                '}';
-    }
+
 }

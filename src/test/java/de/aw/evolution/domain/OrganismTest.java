@@ -3,8 +3,8 @@ package de.aw.evolution.domain;
 import org.junit.Test;
 
 import static de.aw.evolution.domain.data.TestDataBuilder.aFeature;
-import static de.aw.evolution.domain.data.TestDataBuilder.aGeneration;
 import static de.aw.evolution.domain.data.TestDataBuilder.aGenom;
+import static de.aw.evolution.domain.data.TestDataBuilder.anEmptyGeneration;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -19,7 +19,7 @@ public class OrganismTest {
         Phenotype phenotype = new Phenotype();
         phenotype.add(aFeature());
         phenotype.add(aFeature());
-        Organism organism = new Organism(aGeneration(), aGenom(), phenotype);
+        Organism organism = new Organism(anEmptyGeneration(), aGenom(), phenotype);
 
         assertThat(phenotype.size(), is(equalTo(organism.getPhenotype().size())));
 
