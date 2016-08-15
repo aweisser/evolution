@@ -1,6 +1,6 @@
 package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.Genom;
+import de.aw.evolution.domain.model.Genom;
 
 /**
  *  Als Mutation wird in der Biologie eine dauerhafte Veränderung des Erbgutes (Genom) bezeichnet.

@@ -1,7 +1,7 @@
 package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.Couple;
-import de.aw.evolution.domain.Genom;
+import de.aw.evolution.domain.model.Couple;
+import de.aw.evolution.domain.model.Genom;
 
 /**
  * Durch Rekombination, die durch die Meiose bei der Keimzellenbildung und die Kernverschmelzung bei der Befruchtung erfolgt,

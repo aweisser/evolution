@@ -1,4 +1,4 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 /**
  * Als Gen wird meist ein Abschnitt auf der DNA bezeichnet, der die Grundinformationen zur Herstellung

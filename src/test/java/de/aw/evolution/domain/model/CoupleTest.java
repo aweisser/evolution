@@ -1,10 +1,11 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 import org.junit.Test;
 
-import static de.aw.evolution.domain.data.TestDataBuilder.*;
+import static de.aw.evolution.domain.data.TestDataBuilder.aGenom;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 
 /**
  * @author armin.weisser

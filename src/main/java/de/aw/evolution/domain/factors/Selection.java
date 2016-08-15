@@ -1,6 +1,6 @@
 package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.Group;
+import de.aw.evolution.domain.model.Group;
 
 /**
  * Selektion ist einer der Evolutionsfaktoren.

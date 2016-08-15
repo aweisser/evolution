@@ -1,6 +1,6 @@
 package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.Population;
+import de.aw.evolution.domain.model.Population;
 
 /**
  * Unter Gendrift versteht man eine zufallsbedingte Änderung des Genpools.

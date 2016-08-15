@@ -1,4 +1,4 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 /**
  * Genlocus heißt in der Genetik die physische Position eines Gens im Genom, der Genort.

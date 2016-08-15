@@ -1,8 +1,8 @@
 package de.aw.evolution;
 
-import de.aw.evolution.domain.Environment;
-import de.aw.evolution.domain.Population;
 import de.aw.evolution.domain.factors.EvolutionaryFactors;
+import de.aw.evolution.domain.model.Environment;
+import de.aw.evolution.domain.model.Population;
 
 import java.util.logging.Logger;
 

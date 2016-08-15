@@ -1,4 +1,4 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 import de.aw.evolution.domain.factors.Death;
 import de.aw.evolution.domain.factors.GeneticDrift;
@@ -18,7 +18,7 @@ import java.util.Set;
  *
  * @author armin.weisser
  */
-public class Population  {
+public class Population {
 
     private Generation currentGeneration;
 

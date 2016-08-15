@@ -1,6 +1,6 @@
 package de.aw.evolution.util;
 
-import de.aw.evolution.domain.Organism;
+import de.aw.evolution.domain.model.Organism;
 
 import java.util.Comparator;
 

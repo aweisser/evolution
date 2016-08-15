@@ -1,4 +1,4 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 /**
  * Die genetische Information ist der Nutzteil eines Gens.

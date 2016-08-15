@@ -1,13 +1,5 @@
 package de.aw.evolution;
 
-import de.aw.evolution.domain.Environment;
-import de.aw.evolution.domain.Fitness;
-import de.aw.evolution.domain.Gene;
-import de.aw.evolution.domain.GeneLocus;
-import de.aw.evolution.domain.Generation;
-import de.aw.evolution.domain.GeneticInformation;
-import de.aw.evolution.domain.Genom;
-import de.aw.evolution.domain.Phenotype;
 import de.aw.evolution.domain.factors.Death;
 import de.aw.evolution.domain.factors.EnvironmentalFactor;
 import de.aw.evolution.domain.factors.Feature;
@@ -17,6 +9,14 @@ import de.aw.evolution.domain.factors.PartnerSelection;
 import de.aw.evolution.domain.factors.PhenotypeCreator;
 import de.aw.evolution.domain.factors.Recombination;
 import de.aw.evolution.domain.factors.Selection;
+import de.aw.evolution.domain.model.Environment;
+import de.aw.evolution.domain.model.Fitness;
+import de.aw.evolution.domain.model.Gene;
+import de.aw.evolution.domain.model.GeneLocus;
+import de.aw.evolution.domain.model.Generation;
+import de.aw.evolution.domain.model.GeneticInformation;
+import de.aw.evolution.domain.model.Genom;
+import de.aw.evolution.domain.model.Phenotype;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Ignore;
@@ -127,7 +127,7 @@ public class EvolutionExperiment1 extends EvolutionFactory {
 
     @Override
     protected Death createDeath() {
-        return Death.none();
+        return Death.forWeakest(0.25f);
     }
 
 }

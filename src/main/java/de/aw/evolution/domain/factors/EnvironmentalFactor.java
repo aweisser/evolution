@@ -1,7 +1,7 @@
 package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.Fitness;
-import de.aw.evolution.domain.Organism;
+import de.aw.evolution.domain.model.Fitness;
+import de.aw.evolution.domain.model.Organism;
 
 import java.util.function.Function;
 

@@ -1,4 +1,4 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 import de.aw.evolution.domain.factors.EnvironmentalFactor;
 

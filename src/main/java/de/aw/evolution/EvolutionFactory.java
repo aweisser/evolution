@@ -1,9 +1,5 @@
 package de.aw.evolution;
 
-import de.aw.evolution.domain.Environment;
-import de.aw.evolution.domain.Generation;
-import de.aw.evolution.domain.Genom;
-import de.aw.evolution.domain.Population;
 import de.aw.evolution.domain.factors.Death;
 import de.aw.evolution.domain.factors.EvolutionaryFactors;
 import de.aw.evolution.domain.factors.GeneticDrift;
@@ -13,6 +9,10 @@ import de.aw.evolution.domain.factors.PhenotypeCreator;
 import de.aw.evolution.domain.factors.Recombination;
 import de.aw.evolution.domain.factors.Reproduction;
 import de.aw.evolution.domain.factors.Selection;
+import de.aw.evolution.domain.model.Environment;
+import de.aw.evolution.domain.model.Generation;
+import de.aw.evolution.domain.model.Genom;
+import de.aw.evolution.domain.model.Population;
 
 import java.util.function.Supplier;
 

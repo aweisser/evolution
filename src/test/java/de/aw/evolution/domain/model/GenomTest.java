@@ -1,4 +1,4 @@
-package de.aw.evolution.domain;
+package de.aw.evolution.domain.model;
 
 import org.junit.Test;
 
@@ -20,9 +20,6 @@ public class GenomTest {
         Genom copy = genom.clone();
         assertThat(copy, is(not(sameInstance(genom))));
         assertThat(copy.size(), is(equalTo(genom.size())));
-
-
-
     }
 
 }

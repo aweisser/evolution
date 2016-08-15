@@ -1,8 +1,8 @@
 package de.aw.evolution.domain.factors;
 
-import de.aw.evolution.domain.Environment;
-import de.aw.evolution.domain.Organism;
-import de.aw.evolution.domain.Phenotype;
+import de.aw.evolution.domain.model.Environment;
+import de.aw.evolution.domain.model.Organism;
+import de.aw.evolution.domain.model.Phenotype;
 
 /**
  * Eine Modifikation ist eine durch Umweltfaktoren hervorgerufene Veränderung des Phänotyps, des Erscheinungsbildes eines Lebewesens.
